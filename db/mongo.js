@@ -18,7 +18,7 @@ let db;
 async function connectToDatabase() {
   if (!db) {
     await client.connect();
-    db = client.db();
+    db = client.db("tayoriba");
     console.log('Connected to MongoDB');
   }
   return db;
