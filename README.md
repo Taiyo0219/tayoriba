@@ -2,7 +2,7 @@
 
 若者が「どこに相談すればよいか分からない」という状態から、自分に合った相談窓口を見つけるためのWebアプリです。
 
-![たよりば トップページ](docs/images/top.png)
+<img width="1259" height="681" alt="image" src="https://github.com/user-attachments/assets/fc54ffd0-5387-4ea6-9ce5-d3f2233d0338" />
 
 ## 概要
 
