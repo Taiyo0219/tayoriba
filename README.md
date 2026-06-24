@@ -32,7 +32,7 @@
 
 利用者は、自分の悩みに近いカテゴリをカード形式で選択できます。
 
-![カテゴリ選択画面](docs/images/category-select.png)
+<img width="934" height="752" alt="image" src="https://github.com/user-attachments/assets/6b1bb26c-5ce3-4cfd-9932-69c91f8c8e60" />
 
 対応カテゴリの例：
 
@@ -50,7 +50,7 @@
 
 地域や希望する相談方法を選択して、相談先を絞り込めます。
 
-![検索条件選択画面](docs/images/search-filter.png)
+<img width="948" height="925" alt="image" src="https://github.com/user-attachments/assets/40b82ecf-a509-4fc6-892b-2a5eaf8d1a31" />
 
 検索条件の例：
 
@@ -65,7 +65,7 @@
 
 入力した条件に合う相談先をカード形式で表示します。
 
-![検索結果画面](docs/images/search-results.png)
+<img width="310" height="437" alt="image" src="https://github.com/user-attachments/assets/19573b0a-06a6-48ed-8c31-f93ecde5970a" />
 
 各カードでは、以下の情報を確認できます。
 
@@ -84,7 +84,7 @@
 
 相談先ごとの詳しい情報を確認できます。
 
-![相談先詳細画面](docs/images/support-detail.png)
+<img width="1151" height="858" alt="image" src="https://github.com/user-attachments/assets/ff636e72-a88a-4fdf-9d3c-d4a7e4692b24" />
 
 詳細画面では、以下の情報を表示します。
 
@@ -111,7 +111,7 @@
 
 相談する前に、困っていることや相談したい内容を整理できます。
 
-![相談内容整理メモ](docs/images/consultation-memo.png)
+<img width="1050" height="889" alt="image" src="https://github.com/user-attachments/assets/40e8c0ad-a469-4004-b668-51d09fa46e01" />
 
 入力内容はlocalStorageに保存されるため、同じブラウザであればページを閉じた後も確認できます。
 
