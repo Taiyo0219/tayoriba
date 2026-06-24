@@ -1,0 +1,24 @@
+.page-home {
+  display: grid;
+  gap: 24px;
+}
+
+.hero {
+  display: grid;
+  gap: 20px;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  color: #374151;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.notice-card h2 {
+  margin-top: 0;
+}

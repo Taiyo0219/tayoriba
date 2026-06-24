@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>相談先を探す - たよりば</title>
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/search.css" />
+</head>
+<body>
+  <main class="page page-search">
+    <header class="page-header">
+      <a class="back-link" href="index.html">← トップへ戻る</a>
+      <h1>相談先を探す</h1>
+    </header>
+
+    <section class="step-card">
+      <h2>1. 困りごとのカテゴリを選ぶ</h2>
+      <div class="category-grid" id="categoryGrid"></div>
+      <p class="error-message" id="categoryError"></p>
+    </section>
+
+    <section class="step-card">
+      <h2>2. 相談方法を選ぶ</h2>
+      <div class="method-list" id="methodList"></div>
+    </section>
+
+    <section class="step-card">
+      <h2>3. 条件を選ぶ</h2>
+      <div class="field-group">
+        <label for="areaSelect">地域</label>
+        <select id="areaSelect" name="area">
+          <option value="tokyo">東京都</option>
+          <option value="nationwide">全国対応</option>
+          <option value="tokyo+national">東京都＋全国対応</option>
+        </select>
+      </div>
+      <div class="checkbox-group">
+        <label><input type="checkbox" id="freeCheckbox" name="free" /> 無料</label>
+        <label><input type="checkbox" id="anonymousCheckbox" name="anonymous" /> 匿名相談可能</label>
+      </div>
+    </section>
+
+    <section class="action-card">
+      <button class="button primary" id="searchButton">検索する</button>
+    </section>
+
+    <section class="notice-card">
+      <h2>緊急性の高い場合</h2>
+      <p>今すぐ安全が脅かされている場合は、緊急通報を利用してください。</p>
+    </section>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/search.js"></script>
+</body>
+</html>

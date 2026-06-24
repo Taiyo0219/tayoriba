@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>相談内容を整理する - たよりば</title>
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/detail.css" />
+</head>
+<body>
+  <main class="page page-memo">
+    <header class="page-header">
+      <a class="back-link" href="detail.html">← 相談先の詳細へ戻る</a>
+      <h1>相談内容を整理する</h1>
+    </header>
+
+    <section class="memo-card">
+      <p class="muted">個人情報や機密情報は入力しすぎないように注意してください。</p>
+      <form id="memoForm">
+        <label>
+          今困っていること
+          <textarea id="currentIssue" rows="4"></textarea>
+          <span class="char-count" id="currentIssueCount">0文字</span>
+        </label>
+        <label>
+          いつ頃から困っているか
+          <textarea id="sinceWhen" rows="2"></textarea>
+          <span class="char-count" id="sinceWhenCount">0文字</span>
+        </label>
+        <label>
+          特に相談したいこと
+          <textarea id="mainConcern" rows="4"></textarea>
+          <span class="char-count" id="mainConcernCount">0文字</span>
+        </label>
+        <label>
+          相談先に伝えておきたいこと
+          <textarea id="messageToSupport" rows="3"></textarea>
+          <span class="char-count" id="messageToSupportCount">0文字</span>
+        </label>
+        <label>
+          希望する対応
+          <textarea id="desiredSupport" rows="2"></textarea>
+          <span class="char-count" id="desiredSupportCount">0文字</span>
+        </label>
+        <div class="memo-actions">
+          <button type="button" class="button primary" id="saveMemoButton">保存する</button>
+          <button type="button" class="button" id="clearMemoButton">削除する</button>
+          <a class="button" href="favorites.html">お気に入りを見る</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/memo.js"></script>
+</body>
+</html>

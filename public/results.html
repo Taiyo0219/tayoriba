@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>検索結果 - たよりば</title>
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/results.css" />
+</head>
+<body>
+  <main class="page page-results">
+    <header class="page-header">
+      <a class="back-link" href="search.html">← 条件を変更する</a>
+      <h1>検索結果</h1>
+    </header>
+
+    <section class="summary-card" id="summaryCard"></section>
+    <section class="results-count" id="resultsCount"></section>
+    <section class="results-list" id="resultsList"></section>
+    <section class="empty-state hidden" id="emptyState">
+      <p>条件に一致する相談先が見つかりませんでした。条件を減らすか、全国対応の相談先を確認してください。</p>
+      <a class="button" href="search.html">条件を変更する</a>
+      <a class="button" href="results.html?all=true">すべての相談先を見る</a>
+    </section>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/results.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+.page-detail,
+.page-memo {
+  display: grid;
+  gap: 18px;
+}
+
+.detail-card {
+  display: grid;
+  gap: 14px;
+}
+
+.detail-card dt {
+  font-weight: 700;
+}
+
+.detail-card dd {
+  margin: 0 0 12px;
+  color: #374151;
+}
+
+.detail-card p {
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.memo-card label {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.char-count {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.memo-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
