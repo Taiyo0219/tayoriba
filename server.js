@@ -26,3 +26,4 @@ connectToDatabase()
     console.error('Failed to connect to database:', error);
     process.exit(1);
   });
+––
