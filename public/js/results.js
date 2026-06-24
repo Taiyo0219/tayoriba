@@ -25,6 +25,14 @@ function toggleFavorite(supportId) {
 }
 
 function renderSupportCard(support) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'results-item';
+
+  const link = document.createElement('a');
+  link.className = 'support-card-link';
+  link.href = `detail.html?id=${encodeURIComponent(support.supportId)}`;
+  link.setAttribute('aria-label', `${support.name}の詳細を見る`);
+
   const card = document.createElement('article');
   card.className = 'results-card';
 
@@ -50,26 +58,29 @@ function renderSupportCard(support) {
   const details = document.createElement('p');
   details.textContent = `受付時間: ${support.openingHours || '未設定'}`;
 
-  const buttons = document.createElement('div');
-  buttons.className = 'actions';
+  const cardActions = document.createElement('div');
+  cardActions.className = 'actions';
 
-  const detailLink = document.createElement('a');
-  detailLink.className = 'button';
-  detailLink.href = `detail.html?supportId=${encodeURIComponent(support.supportId)}`;
-  detailLink.textContent = '詳細を見る';
+  const detailButton = document.createElement('span');
+  detailButton.className = 'button detail-button';
+  detailButton.textContent = '詳細を見る';
+
+  cardActions.append(detailButton);
+  card.append(header, meta, details, cardActions);
+  link.appendChild(card);
 
   const favoriteButton = document.createElement('button');
   favoriteButton.type = 'button';
   favoriteButton.className = 'button';
   favoriteButton.textContent = isFavorite(support.supportId) ? 'お気に入り解除' : 'お気に入り';
-  favoriteButton.addEventListener('click', () => {
+  favoriteButton.addEventListener('click', (event) => {
+    event.stopPropagation();
     toggleFavorite(support.supportId);
     favoriteButton.textContent = isFavorite(support.supportId) ? 'お気に入り解除' : 'お気に入り';
   });
 
-  buttons.append(detailLink, favoriteButton);
-  card.append(header, meta, details, buttons);
-  return card;
+  wrapper.append(link, favoriteButton);
+  return wrapper;
 }
 
 function renderResults(supports) {

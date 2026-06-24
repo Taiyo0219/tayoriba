@@ -70,7 +70,7 @@ function createNotice() {
 
 async function loadSupport() {
   const params = new URLSearchParams(window.location.search);
-  const supportId = params.get('supportId');
+  const supportId = params.get('id');
   if (!supportId) {
     detailCard.innerHTML = '<p class="error-message">相談先が見つかりませんでした。</p>';
     return;

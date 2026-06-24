@@ -18,6 +18,22 @@
   gap: 16px;
 }
 
+.results-item {
+  display: grid;
+  gap: 10px;
+}
+
+.support-card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.support-card-link:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 4px;
+}
+
 .results-card {
   border: 1px solid #d1d5db;
   border-radius: 18px;
@@ -54,6 +70,19 @@
   gap: 10px;
   flex-wrap: wrap;
   margin-top: 16px;
+}
+
+.detail-button {
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background-color: #eef2ff;
+  color: #1d4ed8;
+}
+
+.detail-button:hover,
+.support-card-link:hover .detail-button {
+  background-color: #dbeafe;
 }
 
 .empty-state {
