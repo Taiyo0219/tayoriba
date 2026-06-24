@@ -1,25 +1,61 @@
 .page-detail,
 .page-memo {
   display: grid;
-  gap: 18px;
+  gap: 24px;
 }
 
 .detail-card {
-  display: grid;
-  gap: 14px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.detail-card dl {
+  margin: 0;
+  padding: 0;
 }
 
 .detail-card dt {
   font-weight: 700;
+  color: #111827;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.detail-card dt:first-child {
+  margin-top: 0;
 }
 
 .detail-card dd {
-  margin: 0 0 12px;
+  margin: 0 0 12px 0;
+  padding: 12px;
+  background-color: #f9fafb;
+  border-radius: 8px;
   color: #374151;
+  border-left: 3px solid #2563eb;
 }
 
 .detail-card p {
   margin: 0;
+  line-height: 1.6;
+}
+
+.notice-card {
+  background-color: #fef3c7;
+  border: 1px solid #fbbf24;
+  border-radius: 16px;
+  padding: 20px 28px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-top: 20px;
+}
+
+.notice-card p {
+  margin: 0;
+  color: #78350f;
+  font-size: 0.95rem;
 }
 
 .actions {
@@ -28,21 +64,76 @@
   flex-wrap: wrap;
 }
 
+.actions .button {
+  flex: 1;
+  min-width: 120px;
+}
+
+.memo-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
 .memo-card label {
   display: grid;
   gap: 8px;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.memo-card textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.memo-card textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  background-color: #ffffff;
 }
 
 .char-count {
   display: inline-block;
   margin-top: 4px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #6b7280;
 }
 
 .memo-actions {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
+}
+
+.memo-actions .button {
+  flex: 1;
+  min-width: 100px;
+}
+
+@media (max-width: 768px) {
+  .detail-card,
+  .memo-card {
+    padding: 20px;
+  }
+
+  .actions,
+  .memo-actions {
+    flex-direction: column;
+  }
+
+  .actions .button,
+  .memo-actions .button {
+    width: 100%;
+  }
 }

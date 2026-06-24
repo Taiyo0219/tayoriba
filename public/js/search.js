@@ -43,7 +43,17 @@ function renderCategories() {
       updateCategorySelection();
       categoryError.textContent = '';
     });
+    card.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        selectedCategory = category.key;
+        updateCategorySelection();
+        categoryError.textContent = '';
+      }
+    });
     card.dataset.key = category.key;
+    card.setAttribute('role', 'option');
+    card.setAttribute('aria-selected', 'false');
     categoryGrid.appendChild(card);
   });
 }
@@ -64,20 +74,38 @@ function renderMethods() {
       }
       updateMethodSelection();
     });
+    card.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const index = selectedMethods.indexOf(method.key);
+        if (index === -1) {
+          selectedMethods.push(method.key);
+        } else {
+          selectedMethods.splice(index, 1);
+        }
+        updateMethodSelection();
+      }
+    });
     card.dataset.key = method.key;
+    card.setAttribute('role', 'option');
+    card.setAttribute('aria-selected', 'false');
     methodList.appendChild(card);
   });
 }
 
 function updateCategorySelection() {
   document.querySelectorAll('.category-card').forEach((card) => {
-    card.classList.toggle('selected', card.dataset.key === selectedCategory);
+    const isSelected = card.dataset.key === selectedCategory;
+    card.classList.toggle('selected', isSelected);
+    card.setAttribute('aria-selected', isSelected ? 'true' : 'false');
   });
 }
 
 function updateMethodSelection() {
   document.querySelectorAll('.method-card').forEach((card) => {
-    card.classList.toggle('selected', selectedMethods.includes(card.dataset.key));
+    const isSelected = selectedMethods.includes(card.dataset.key);
+    card.classList.toggle('selected', isSelected);
+    card.setAttribute('aria-selected', isSelected ? 'true' : 'false');
   });
 }
 
