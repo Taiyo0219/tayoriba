@@ -1,5 +1,8 @@
+const dns = require('node:dns');
 const { MongoClient } = require('mongodb');
 const dotenv = require('dotenv');
+
+dns.setServers(['8.8.8.8', '1.1.1.1']);
 
 dotenv.config();
 
@@ -8,10 +11,7 @@ if (!uri) {
   throw new Error('MONGODB_URI is not set in .env');
 }
 
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const client = new MongoClient(uri);
 
 let db;
 
