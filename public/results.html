@@ -14,13 +14,31 @@
       <h1>検索結果</h1>
     </header>
 
+    <section class="guide-card">
+      <h2>迷ったときの見方</h2>
+      <ol>
+        <li>自分が対象に含まれるか</li>
+        <li>相談方法が使いやすいか</li>
+        <li>受付時間に連絡できるか</li>
+        <li>無料・匿名など希望に合っているか</li>
+      </ol>
+    </section>
     <section class="summary-card" id="summaryCard"></section>
     <section class="results-count" id="resultsCount"></section>
     <section class="results-list" id="resultsList"></section>
     <section class="empty-state hidden" id="emptyState">
-      <p>条件に一致する相談先が見つかりませんでした。条件を減らすか、全国対応の相談先を確認してください。</p>
-      <a class="button" href="search.html">条件を変更する</a>
-      <a class="button" href="results.html?all=true">すべての相談先を見る</a>
+      <p>条件にぴったり合う相談先は見つかりませんでした。</p>
+      <p>条件を少しゆるめると、見つかる可能性があります。</p>
+      <ul>
+        <li>相談方法を「まだ決められない」にする</li>
+        <li>匿名条件を外して探す</li>
+        <li>全国対応も含める</li>
+        <li>地域を指定せずに探す</li>
+      </ul>
+      <div class="empty-actions">
+        <a class="button primary" href="search.html">条件を変更する</a>
+        <a class="button" href="results.html?all=true">すべての相談先を見る</a>
+      </div>
     </section>
   </main>
 

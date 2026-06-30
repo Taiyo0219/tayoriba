@@ -77,10 +77,37 @@
   line-height: 1.4;
 }
 
-.method-list {
+.method-options {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: 12px;
+}
+
+.method-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.method-option input[type="radio"] {
+  margin-top: 4px;
+  accent-color: #2563eb;
+}
+
+.method-option label {
+  display: block;
+  margin: 0;
+  color: #111827;
+  font-weight: 600;
+}
+
+.field-help {
+  margin: 0 0 16px;
+  color: #4b5563;
+  font-size: 0.95rem;
 }
 
 .checkbox-group {

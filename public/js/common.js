@@ -20,10 +20,12 @@
     const map = {
       phone: '電話',
       'face-to-face': '対面',
-      online: 'オンライン通話',
+      online: 'オンライン',
       chat: 'チャット',
       email: 'メール',
       sns: 'LINEなどのSNS',
+      written: '文字相談',
+      undecided: 'まだ決められない',
     };
     return map[method] || method;
   }

@@ -12,16 +12,15 @@ const categories = [
 ];
 
 const methods = [
-  { key: 'phone', label: '電話', description: '直接電話で相談する' },
-  { key: 'face-to-face', label: '対面', description: '窓口や面談で相談する' },
-  { key: 'online', label: 'オンライン通話', description: 'ビデオ通話や音声通話' },
-  { key: 'chat', label: 'チャット', description: 'テキストチャットで相談' },
-  { key: 'email', label: 'メール', description: 'メールで相談する' },
-  { key: 'sns', label: 'LINEなどのSNS', description: 'SNSで相談する' },
+  { key: 'phone', label: '電話で相談できる', description: '直接電話で相談する' },
+  { key: 'written', label: '文字で相談したい', description: 'メール・チャット・LINEなど文字で相談する' },
+  { key: 'face-to-face', label: '対面で話したい', description: '窓口や面談で相談する' },
+  { key: 'online', label: 'オンラインで相談したい', description: 'ビデオ通話や音声通話で相談する' },
+  { key: 'undecided', label: 'まだ決められない', description: '相談方法はあとから変更できます' },
 ];
 
-const categoryGrid = document.getElementById('categoryGrid');
-const methodList = document.getElementById('methodList');
+const categoryOptions = document.getElementById('categoryOptions');
+const methodOptions = document.getElementById('methodOptions');
 const categoryError = document.getElementById('categoryError');
 const searchButton = document.getElementById('searchButton');
 const areaSelect = document.getElementById('areaSelect');
@@ -29,21 +28,21 @@ const freeCheckbox = document.getElementById('freeCheckbox');
 const anonymousCheckbox = document.getElementById('anonymousCheckbox');
 
 let selectedCategory = null;
-let selectedMethods = [];
+let selectedMethod = null;
 
 function renderCategories() {
-  categoryGrid.innerHTML = '';
+  categoryOptions.innerHTML = '';
   categories.forEach((category) => {
-    const card = document.createElement('button');
-    card.type = 'button';
-    card.className = 'category-card';
-    card.innerHTML = `<h3>${category.label}</h3><p>${category.description}</p>`;
-    card.addEventListener('click', () => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'category-card';
+    button.innerHTML = `<strong>${category.label}</strong><span>${category.description}</span>`;
+    button.addEventListener('click', () => {
       selectedCategory = category.key;
       updateCategorySelection();
       categoryError.textContent = '';
     });
-    card.addEventListener('keypress', (e) => {
+    button.addEventListener('keypress', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         selectedCategory = category.key;
@@ -51,45 +50,31 @@ function renderCategories() {
         categoryError.textContent = '';
       }
     });
-    card.dataset.key = category.key;
-    card.setAttribute('role', 'option');
-    card.setAttribute('aria-selected', 'false');
-    categoryGrid.appendChild(card);
+    button.dataset.key = category.key;
+    button.setAttribute('aria-selected', 'false');
+    categoryOptions.appendChild(button);
   });
 }
 
 function renderMethods() {
-  methodList.innerHTML = '';
+  methodOptions.innerHTML = '';
   methods.forEach((method) => {
-    const card = document.createElement('button');
-    card.type = 'button';
-    card.className = 'method-card';
-    card.innerHTML = `<h3>${method.label}</h3><p>${method.description}</p>`;
-    card.addEventListener('click', () => {
-      const index = selectedMethods.indexOf(method.key);
-      if (index === -1) {
-        selectedMethods.push(method.key);
-      } else {
-        selectedMethods.splice(index, 1);
-      }
+    const row = document.createElement('label');
+    row.className = 'method-option';
+    row.innerHTML = `
+      <input type="radio" name="method" value="${method.key}" />
+      <div>
+        <span>${method.label}</span>
+        <p>${method.description}</p>
+      </div>
+    `;
+    const input = row.querySelector('input');
+    input.addEventListener('change', () => {
+      selectedMethod = method.key;
       updateMethodSelection();
     });
-    card.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        const index = selectedMethods.indexOf(method.key);
-        if (index === -1) {
-          selectedMethods.push(method.key);
-        } else {
-          selectedMethods.splice(index, 1);
-        }
-        updateMethodSelection();
-      }
-    });
-    card.dataset.key = method.key;
-    card.setAttribute('role', 'option');
-    card.setAttribute('aria-selected', 'false');
-    methodList.appendChild(card);
+    row.dataset.key = method.key;
+    methodOptions.appendChild(row);
   });
 }
 
@@ -102,10 +87,13 @@ function updateCategorySelection() {
 }
 
 function updateMethodSelection() {
-  document.querySelectorAll('.method-card').forEach((card) => {
-    const isSelected = selectedMethods.includes(card.dataset.key);
-    card.classList.toggle('selected', isSelected);
-    card.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+  document.querySelectorAll('.method-option').forEach((row) => {
+    const isSelected = row.dataset.key === selectedMethod;
+    row.classList.toggle('selected', isSelected);
+    const radio = row.querySelector('input');
+    if (radio) {
+      radio.checked = isSelected;
+    }
   });
 }
 
@@ -113,7 +101,7 @@ function loadSavedCriteria() {
   const saved = window.Tayoriba.getStorageItem('tayoriba-search-criteria', null);
   if (saved) {
     selectedCategory = saved.category || null;
-    selectedMethods = Array.isArray(saved.methods) ? saved.methods : [];
+    selectedMethod = saved.method || null;
     areaSelect.value = saved.area || 'tokyo+national';
     freeCheckbox.checked = saved.free || false;
     anonymousCheckbox.checked = saved.anonymous || false;
@@ -123,7 +111,7 @@ function loadSavedCriteria() {
 function saveCriteria() {
   window.Tayoriba.setStorageItem('tayoriba-search-criteria', {
     category: selectedCategory,
-    methods: selectedMethods,
+    method: selectedMethod,
     area: areaSelect.value,
     free: freeCheckbox.checked,
     anonymous: anonymousCheckbox.checked,
@@ -138,9 +126,8 @@ function handleSearch() {
 
   const params = new URLSearchParams();
   params.set('category', selectedCategory);
-
-  if (selectedMethods.length) {
-    selectedMethods.forEach((method) => params.append('method', method));
+  if (selectedMethod && selectedMethod !== 'undecided') {
+    params.set('method', selectedMethod);
   }
 
   const areaValue = areaSelect.value;
