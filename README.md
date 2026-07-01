@@ -12,26 +12,32 @@
 
 <!-- ここにトップページのスクリーンショットを貼る -->
 <!-- 推奨画像: docs/images/top.png または GitHubの画像URL -->
+<img width="1913" height="949" alt="image" src="https://github.com/user-attachments/assets/f70c382c-2ba7-49ec-a5bc-76c7f49f6911" />
 
 ### 探し方ガイド
 
 <!-- ここに guide.html の質問画面スクリーンショットを貼る -->
+<img width="1908" height="946" alt="image" src="https://github.com/user-attachments/assets/4370a79b-366b-4008-81f8-aac25001f4a6" />
 
 ### 検索画面
 
 <!-- ここに search.html の進捗表示つき検索画面スクリーンショットを貼る -->
+<img width="1906" height="946" alt="image" src="https://github.com/user-attachments/assets/0475d79b-e205-4b7b-9710-9d354adcbd4b" />
 
 ### 検索結果画面
 
 <!-- ここに results.html の相談先一覧スクリーンショットを貼る -->
+<img width="1913" height="939" alt="image" src="https://github.com/user-attachments/assets/9a69aa02-af93-43e7-ba93-73b4d55f5bd3" />
 
 ### 詳細画面
 
 <!-- ここに detail.html の相談先詳細スクリーンショットを貼る -->
+<img width="1914" height="944" alt="image" src="https://github.com/user-attachments/assets/b3197926-dbe5-434a-8bfb-4a59beda7c65" />
 
 ### 相談メモ画面
 
 <!-- ここに memo.html のスクリーンショットを貼る -->
+<img width="1913" height="947" alt="image" src="https://github.com/user-attachments/assets/85b89e2d-9919-42d5-b608-69f9bffd4f67" />
 
 ## 概要
 
