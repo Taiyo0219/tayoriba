@@ -5,53 +5,35 @@ const router = express.Router();
 
 function buildQuery(params) {
   const query = { isPublished: true };
-  const andFilters = [];
 
   if (params.category) {
-    andFilters.push({ categories: params.category });
+    query.categories = params.category;
   }
 
   if (params.area) {
-    if (params.area === 'tokyo' || params.area === 'tokyo+national') {
-      andFilters.push({ $or: [{ areas: 'tokyo' }, { nationwide: true }] });
+    if (params.area === 'tokyo') {
+      query.$or = [{ areas: 'tokyo' }, { nationwide: true }];
     } else if (params.area === 'nationwide') {
-      andFilters.push({ nationwide: true });
+      query.nationwide = true;
+    } else if (params.area === 'tokyo+national') {
+      query.$or = [{ areas: 'tokyo' }, { nationwide: true }];
     }
   }
 
   if (params.method) {
-    const requestedMethods = Array.isArray(params.method) ? params.method : [params.method];
-    const methodFilters = [];
-
-    requestedMethods.forEach((method) => {
-      if (method === 'written') {
-        methodFilters.push({ methods: { $in: ['email', 'chat', 'sns'] } });
-      } else if (method === 'undecided' || method === 'any') {
-        return;
-      } else {
-        methodFilters.push({ methods: method });
-      }
-    });
-
-    if (methodFilters.length === 1) {
-      andFilters.push(methodFilters[0]);
-    } else if (methodFilters.length > 1) {
-      andFilters.push({ $or: methodFilters });
+    if (Array.isArray(params.method) && params.method.length > 0) {
+      query.methods = { $in: params.method };
+    } else {
+      query.methods = params.method;
     }
   }
 
   if (params.free === 'true') {
-    andFilters.push({ free: true });
+    query.free = true;
   }
 
   if (params.anonymous === 'true') {
-    andFilters.push({ anonymous: true });
-  }
-
-  if (andFilters.length === 1) {
-    Object.assign(query, andFilters[0]);
-  } else if (andFilters.length > 1) {
-    query.$and = andFilters;
+    query.anonymous = true;
   }
 
   return query;

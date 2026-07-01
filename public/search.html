@@ -14,21 +14,52 @@
       <h1>相談先を探す</h1>
     </header>
 
+    <section class="search-progress" aria-label="検索条件の入力状況">
+      <p class="search-progress__label">入力の流れ</p>
+      <ol class="search-progress__list">
+        <li class="search-progress__item is-current" data-step="category">
+          <span class="search-progress__title">1. 困りごと</span>
+          <span class="search-progress__status">未選択</span>
+        </li>
+        <li class="search-progress__item is-pending" data-step="method">
+          <span class="search-progress__title">2. 相談方法</span>
+          <span class="search-progress__status">未選択</span>
+        </li>
+        <li class="search-progress__item is-pending" data-step="area">
+          <span class="search-progress__title">3. 地域</span>
+          <span class="search-progress__status">未選択</span>
+        </li>
+        <li class="search-progress__item is-optional" data-step="options">
+          <span class="search-progress__title">4. 条件</span>
+          <span class="search-progress__status">任意</span>
+        </li>
+        <li class="search-progress__item is-pending" data-step="submit">
+          <span class="search-progress__title">5. 検索へ進む</span>
+          <span class="search-progress__status">未到達</span>
+        </li>
+      </ol>
+      <p class="search-progress__message" id="searchProgressMessage">
+        困りごとを選んでください。
+      </p>
+    </section>
+
     <section class="step-card">
       <h2>1. 困りごとを選ぶ</h2>
       <p class="field-help">今のあなたに近いものを選んでください。迷う場合は「どれを選べばよいか分からない」を選んでください。</p>
-      <div class="category-options" id="categoryOptions"></div>
+      <div class="category-options option-list" id="categoryOptions"></div>
       <p class="error-message" id="categoryError"></p>
     </section>
 
     <section class="step-card">
       <h2>2. 相談方法の希望</h2>
       <p class="field-help">相談方法はあとから変更できます。迷う場合は「まだ決められない」を選んでください。</p>
-      <div class="method-options" id="methodOptions"></div>
+      <div class="method-options option-list" id="methodOptions"></div>
+      <p class="error-message" id="methodError"></p>
     </section>
 
     <section class="step-card">
-      <h2>3. 条件を選ぶ</h2>
+      <h2>3. 地域を選ぶ</h2>
+      <p class="field-help">まずは使いやすい地域の範囲を選んでください。</p>
       <div class="field-group">
         <label for="areaSelect">地域</label>
         <select id="areaSelect" name="area">
@@ -37,6 +68,11 @@
           <option value="tokyo+national">東京都＋全国対応</option>
         </select>
       </div>
+    </section>
+
+    <section class="step-card">
+      <h2>4. 条件を選ぶ（任意）</h2>
+      <p class="field-help">大事にしたい条件があれば選んでください。選ばなくても検索できます。</p>
       <div class="checkbox-group">
         <label><input type="checkbox" id="freeCheckbox" name="free" /> 無料</label>
         <label><input type="checkbox" id="anonymousCheckbox" name="anonymous" /> 匿名相談可能</label>
@@ -44,7 +80,8 @@
     </section>
 
     <section class="action-card">
-      <button class="button primary" id="searchButton">検索する</button>
+      <p class="field-help">困りごと、相談方法、地域を選ぶと相談先を検索できます。</p>
+      <button class="button primary" id="searchButton">検索へ進む</button>
     </section>
 
     <section class="notice-card">

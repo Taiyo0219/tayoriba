@@ -1,83 +1,103 @@
 .page-home {
   display: grid;
-  gap: 32px;
+  gap: 56px;
 }
 
-.hero {
-  background-color: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  color: #ffffff;
+.home-hero {
+  display: grid;
+  gap: 20px;
+  padding: 24px 0 40px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.home-description {
+  max-width: 720px;
+  margin: 0;
+  color: #334155;
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.home-capabilities {
   display: grid;
   gap: 24px;
 }
 
-.hero p {
-  font-size: 1.2rem;
-  color: #ffffff;
-  line-height: 1.8;
+.home-action-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.home-action {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.home-action h3 {
   margin: 0;
-}
-
-.actions {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.actions .button {
-  flex: 1;
-  min-width: 140px;
-}
-
-.actions .button.primary {
-  background-color: #ffffff;
-  color: #2563eb;
-}
-
-.actions .button.primary:hover {
-  background-color: #f0f9ff;
-}
-
-.notice-card {
-  background-color: #fef3c7;
-  border-left: 4px solid #fbbf24;
-}
-
-.notice-card h2 {
-  margin: 0 0 16px;
+  color: var(--heading-color);
   font-size: 1.1rem;
-  color: #92400e;
+  line-height: 1.5;
 }
 
-.notice-card ul {
+.home-action p {
   margin: 0;
-  padding-left: 20px;
+  color: #475569;
+  line-height: 1.8;
 }
 
-.notice-card li {
-  color: #78350f;
-  margin-bottom: 12px;
-  line-height: 1.6;
+.home-notice {
+  display: grid;
+  gap: 12px;
+  padding: 24px;
+  background-color: #eef3ff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
 }
 
-.notice-card li:last-child {
-  margin-bottom: 0;
+.home-notice h2 {
+  margin: 0;
+  color: var(--heading-color);
+  font-size: 1rem;
+}
+
+.home-notice p {
+  margin: 0;
+  color: #334155;
+  line-height: 1.8;
 }
 
 @media (max-width: 768px) {
   .page-home {
-    gap: 24px;
+    gap: 40px;
   }
 
-  .actions {
+  .home-hero {
+    padding-top: 16px;
+    padding-bottom: 32px;
+  }
+
+  .home-actions {
     flex-direction: column;
   }
 
-  .actions .button {
+  .home-actions .button {
     width: 100%;
   }
 
-  .hero p {
-    font-size: 1.05rem;
+  .home-action-list {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 }

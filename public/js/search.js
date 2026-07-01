@@ -22,10 +22,13 @@ const methods = [
 const categoryOptions = document.getElementById('categoryOptions');
 const methodOptions = document.getElementById('methodOptions');
 const categoryError = document.getElementById('categoryError');
+const methodError = document.getElementById('methodError');
 const searchButton = document.getElementById('searchButton');
 const areaSelect = document.getElementById('areaSelect');
 const freeCheckbox = document.getElementById('freeCheckbox');
 const anonymousCheckbox = document.getElementById('anonymousCheckbox');
+const progressItems = document.querySelectorAll('.search-progress__item');
+const progressMessage = document.getElementById('searchProgressMessage');
 
 let selectedCategory = null;
 let selectedMethod = null;
@@ -35,20 +38,19 @@ function renderCategories() {
   categories.forEach((category) => {
     const button = document.createElement('button');
     button.type = 'button';
-    button.className = 'category-card';
-    button.innerHTML = `<strong>${category.label}</strong><span>${category.description}</span>`;
+    button.className = 'category-card option-button';
+    button.innerHTML = `
+      <span class="option-marker" aria-hidden="true"></span>
+      <span class="option-text">
+        <span class="option-title">${category.label}</span>
+        <span class="option-description">${category.description}</span>
+      </span>
+    `;
     button.addEventListener('click', () => {
       selectedCategory = category.key;
       updateCategorySelection();
       categoryError.textContent = '';
-    });
-    button.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        selectedCategory = category.key;
-        updateCategorySelection();
-        categoryError.textContent = '';
-      }
+      updateSearchProgress();
     });
     button.dataset.key = category.key;
     button.setAttribute('aria-selected', 'false');
@@ -60,18 +62,20 @@ function renderMethods() {
   methodOptions.innerHTML = '';
   methods.forEach((method) => {
     const row = document.createElement('label');
-    row.className = 'method-option';
+    row.className = 'method-option option-button';
     row.innerHTML = `
       <input type="radio" name="method" value="${method.key}" />
-      <div>
-        <span>${method.label}</span>
-        <p>${method.description}</p>
-      </div>
+      <span class="option-text">
+        <span class="option-title">${method.label}</span>
+        <span class="option-description">${method.description}</span>
+      </span>
     `;
     const input = row.querySelector('input');
     input.addEventListener('change', () => {
       selectedMethod = method.key;
       updateMethodSelection();
+      methodError.textContent = '';
+      updateSearchProgress();
     });
     row.dataset.key = method.key;
     methodOptions.appendChild(row);
@@ -95,6 +99,54 @@ function updateMethodSelection() {
       radio.checked = isSelected;
     }
   });
+}
+
+function setProgressStep(stepName, state, statusText) {
+  const item = Array.from(progressItems).find((step) => step.dataset.step === stepName);
+  if (!item) {
+    return;
+  }
+
+  item.classList.remove('is-complete', 'is-current', 'is-pending', 'is-optional');
+  item.classList.add(state);
+  const status = item.querySelector('.search-progress__status');
+  if (status) {
+    status.textContent = statusText;
+  }
+}
+
+function updateSearchProgress() {
+  const hasCategory = Boolean(selectedCategory);
+  const hasMethod = Boolean(selectedMethod);
+  const hasArea = Boolean(areaSelect.value);
+  const hasOptions = freeCheckbox.checked || anonymousCheckbox.checked;
+  const canSearch = hasCategory && hasMethod && hasArea;
+
+  setProgressStep('category', hasCategory ? 'is-complete' : 'is-current', hasCategory ? '完了' : '未選択');
+  setProgressStep(
+    'method',
+    hasMethod ? 'is-complete' : hasCategory ? 'is-current' : 'is-pending',
+    hasMethod ? '完了' : '未選択'
+  );
+  setProgressStep(
+    'area',
+    hasArea ? 'is-complete' : hasCategory && hasMethod ? 'is-current' : 'is-pending',
+    hasArea ? '完了' : '未選択'
+  );
+  setProgressStep('options', hasOptions ? 'is-complete' : 'is-optional', hasOptions ? '選択済み' : '任意');
+  setProgressStep('submit', canSearch ? 'is-current' : 'is-pending', canSearch ? '検索できます' : '未到達');
+
+  if (!hasCategory) {
+    progressMessage.textContent = '困りごとを選んでください。';
+  } else if (!hasMethod) {
+    progressMessage.textContent = '相談方法を選んでください。「まだ決められない」でも大丈夫です。';
+  } else if (!hasArea) {
+    progressMessage.textContent = '地域を選ぶと検索へ進めます。';
+  } else {
+    progressMessage.textContent = '検索へ進めます。条件は必要なものだけ選んでください。';
+  }
+
+  searchButton.disabled = !canSearch;
 }
 
 function loadSavedCriteria() {
@@ -121,11 +173,20 @@ function saveCriteria() {
 function handleSearch() {
   if (!selectedCategory) {
     categoryError.textContent = '困りごとのカテゴリを選んでください。';
+    updateSearchProgress();
+    return;
+  }
+
+  if (!selectedMethod) {
+    methodError.textContent = '相談方法を選んでください。迷う場合は「まだ決められない」を選んでください。';
+    updateSearchProgress();
     return;
   }
 
   const params = new URLSearchParams();
-  params.set('category', selectedCategory);
+  if (selectedCategory !== 'unknown') {
+    params.set('category', selectedCategory);
+  }
   if (selectedMethod && selectedMethod !== 'undecided') {
     params.set('method', selectedMethod);
   }
@@ -153,5 +214,9 @@ window.addEventListener('DOMContentLoaded', () => {
   loadSavedCriteria();
   updateCategorySelection();
   updateMethodSelection();
+  updateSearchProgress();
+  areaSelect.addEventListener('change', updateSearchProgress);
+  freeCheckbox.addEventListener('change', updateSearchProgress);
+  anonymousCheckbox.addEventListener('change', updateSearchProgress);
   searchButton.addEventListener('click', handleSearch);
 });

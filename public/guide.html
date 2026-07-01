@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>探し方の整理 - たよりば</title>
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/guide.css" />
+</head>
+<body>
+  <main class="page page-guide guide-page">
+    <header class="page-header guide-header">
+      <a class="back-link" href="index.html">← トップへ戻る</a>
+    </header>
+
+    <section class="guide-intro" aria-labelledby="guideTitle">
+      <h1 class="page-title" id="guideTitle">探し方の整理</h1>
+      <p class="lead-text">検索条件を自分で選ぶ前に、短い質問で探し方を整理できます。</p>
+      <p>この条件で探すと見つけやすい可能性があります。条件はあとから変更できます。</p>
+    </section>
+
+    <section class="guide-progress" aria-label="探し方の整理状況">
+      <p class="guide-progress__label">探し方の整理</p>
+      <ol class="guide-progress__list">
+        <li class="guide-progress__item is-current" data-step="category">
+          <span>1. 状況</span>
+          <small>未選択</small>
+        </li>
+        <li class="guide-progress__item is-pending" data-step="method">
+          <span>2. 相談方法</span>
+          <small>未選択</small>
+        </li>
+        <li class="guide-progress__item is-optional" data-step="options">
+          <span>3. 大事にしたい条件</span>
+          <small>任意</small>
+        </li>
+        <li class="guide-progress__item is-pending" data-step="result">
+          <span>4. 整理結果</span>
+          <small>未到達</small>
+        </li>
+      </ol>
+      <p class="guide-progress__message" id="guideProgressMessage">
+        まず、今の状況に近いものを選んでください。
+      </p>
+    </section>
+
+    <form class="guide-form" id="guideForm">
+      <fieldset class="guide-question">
+        <legend>1. 今の状況に近いもの</legend>
+        <p>今の状況に近いものを選んでください。</p>
+        <div class="guide-options">
+          <label class="guide-option">
+            <input type="radio" name="category" value="job" required />
+            <span>働くこと・就職で悩んでいる</span>
+          </label>
+          <label class="guide-option">
+            <input type="radio" name="category" value="study" />
+            <span>学校や進路で悩んでいる</span>
+          </label>
+          <label class="guide-option">
+            <input type="radio" name="category" value="money" />
+            <span>お金や生活で困っている</span>
+          </label>
+          <label class="guide-option">
+            <input type="radio" name="category" value="relationship" />
+            <span>人間関係でつらい</span>
+          </label>
+          <label class="guide-option">
+            <input type="radio" name="category" value="mental" />
+            <span>心や体のことで相談したい</span>
+          </label>
+          <label class="guide-option">
+            <input type="radio" name="category" value="" />
+            <span>どれを選べばよいか分からない</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="guide-question">
+        <legend>2. 相談方法の希望</legend>
+        <p>相談方法の希望はありますか。</p>
+        <div class="guide-options">
+          <label class="guide-option">
+            <input type="radio" name="method" value="phone" required />
+            <span>電話でもよい</span>
+          </label>
+          <label class="guide-option">
+            <input type="radio" name="method" value="written" />
+            <span>文字で相談したい</span>
+          </label>
+          <label class="guide-option">
+            <input type="radio" name="method" value="face-to-face" />
+            <span>対面で話したい</span>
+          </label>
+          <label class="guide-option">
+            <input type="radio" name="method" value="online" />
+            <span>オンラインで相談したい</span>
+          </label>
+          <label class="guide-option">
+            <input type="radio" name="method" value="" />
+            <span>まだ決められない</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="guide-question">
+        <legend>3. 大事にしたい条件</legend>
+        <p>大事にしたい条件があれば選んでください。</p>
+        <div class="guide-options guide-options-checkboxes">
+          <label class="guide-option">
+            <input type="checkbox" name="free" />
+            <span>無料で相談したい</span>
+          </label>
+          <label class="guide-option">
+            <input type="checkbox" name="anonymous" />
+            <span>匿名で相談したい</span>
+          </label>
+          <label class="guide-option">
+            <input type="checkbox" name="includeNationwide" />
+            <span>全国対応も含めたい</span>
+          </label>
+          <label class="guide-option">
+            <input type="checkbox" name="reservationFree" />
+            <span>予約なしで相談したい</span>
+          </label>
+          <label class="guide-option">
+            <input type="checkbox" name="noPreference" />
+            <span>特に決まっていない</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="guide-actions">
+        <button class="button button-primary" type="submit">探し方を整理する</button>
+      </div>
+    </form>
+
+    <section class="guide-result hidden" id="guideResult" aria-live="polite" aria-labelledby="guideResultTitle">
+      <h2 id="guideResultTitle">探し方を整理しました</h2>
+      <p>次の条件で探すと、相談先を見つけやすい可能性があります。</p>
+      <dl class="guide-result-list" id="guideResultList"></dl>
+      <p class="guide-result-note">条件は検索画面であとから変更できます。</p>
+      <div class="guide-actions">
+        <a class="button button-primary" id="resultSearchLink" href="results.html">この条件で相談先を見る</a>
+        <a class="button button-secondary" href="search.html">条件を自分で調整する</a>
+        <button class="button button-secondary" type="button" id="restartGuideButton">最初からやり直す</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/guide.js"></script>
+</body>
+</html>
